@@ -1,12 +1,9 @@
-
 function App() {
-
-
   return (
     <>
-     <h2>Matia</h2>
+      <h1 className="text-3xl font-bold underline text-indigo-500">Matia</h1>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
