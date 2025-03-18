@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import ErrorMessage from "./components/ErrorMessage";
+import { getCountries, Countries } from "./apis/countries-api";
 
 // Definición de tipos
 interface FormData {
@@ -22,35 +23,47 @@ const App = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<FormData>({ defaultValues: {
-    name: "",
-    surname: "",
-    telefono: "",
-    email: "",
-    pais: "",
-    provincia: "",
-  }});
+  } = useForm<FormData>({
+    defaultValues: {
+      name: "",
+      surname: "",
+      telefono: "",
+      email: "",
+      pais: "",
+      provincia: "",
+    },
+  });
 
+  // comprueba si cambia el país
   const paisSeleccionado = watch("pais");
 
-  const [paises] = useState<string[]>([
-    "España",
-    "México",
-    "Argentina",
-    "Colombia",
-    "Chile",
-    "Perú",
-    "Ecuador",
-    "Venezuela",
-    "Uruguay",
-    "Bolivia",
-  ]);
+  const [countries, setCountries] = useState<Countries[]>([]);
+
+  useEffect(() => {
+    const fetchCountries = async () => {
+      const countriesList = await getCountries();
+      setCountries(countriesList);
+    };
+    fetchCountries();
+  }, []);
 
   const [provincias] = useState<ProvinciasMap>({
     España: ["Madrid", "Barcelona", "Valencia", "Sevilla", "Zaragoza"],
-    México: ["Ciudad de México", "Jalisco", "Nuevo León", "Puebla", "Guanajuato"],
+    México: [
+      "Ciudad de México",
+      "Jalisco",
+      "Nuevo León",
+      "Puebla",
+      "Guanajuato",
+    ],
     Argentina: ["Buenos Aires", "Córdoba", "Santa Fe", "Mendoza", "Tucumán"],
-    Colombia: ["Bogotá", "Antioquia", "Valle del Cauca", "Atlántico", "Santander"],
+    Colombia: [
+      "Bogotá",
+      "Antioquia",
+      "Valle del Cauca",
+      "Atlántico",
+      "Santander",
+    ],
     Chile: ["Santiago", "Valparaíso", "Biobío", "O'Higgins", "Maule"],
     Perú: ["Lima", "Arequipa", "La Libertad", "Piura", "Cusco"],
     Ecuador: ["Pichincha", "Guayas", "Azuay", "Manabí", "El Oro"],
@@ -74,10 +87,16 @@ const App = () => {
     <main className="flex justify-center mt-20 p-10 ">
       <div className="w-full max-w-6xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
         <div className="bg-gradient-to-r from-pink-900 to-pink-500 px-6 p-4">
-          <h2 className="text-2xl font-bold text-white">Añadir Información de Contacto</h2>
+          <h2 className="text-2xl font-bold text-white">
+            Añadir Información de Contacto
+          </h2>
         </div>
 
-        <form className="p-6" onSubmit={handleSubmit((data) => console.log(data))}>
+        <form
+          noValidate
+          className="p-6"
+          onSubmit={handleSubmit((data) => console.log(data))}
+        >
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {/* Nombre */}
             <div className="mb-1">
@@ -91,7 +110,9 @@ const App = () => {
                 placeholder="Ingrese el nombre"
                 {...register("name", { required: "Nombre es obligatorio" })}
               />
-              {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
+              {errors.name && (
+                <ErrorMessage>{errors.name.message}</ErrorMessage>
+              )}
             </div>
 
             {/* Apellido */}
@@ -104,9 +125,13 @@ const App = () => {
                 type="text"
                 className="input-form-basic"
                 placeholder="Ingrese el apellido"
-                {...register("surname", { required: "El apellido es obligatorio" })}
+                {...register("surname", {
+                  required: "El apellido es obligatorio",
+                })}
               />
-              {errors.surname && <ErrorMessage>{errors.surname.message}</ErrorMessage>}
+              {errors.surname && (
+                <ErrorMessage>{errors.surname.message}</ErrorMessage>
+              )}
             </div>
 
             {/* Teléfono */}
@@ -141,7 +166,9 @@ const App = () => {
                   },
                 })}
               />
-              {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
+              {errors.email && (
+                <ErrorMessage>{errors.email.message}</ErrorMessage>
+              )}
             </div>
 
             {/* País */}
@@ -155,13 +182,15 @@ const App = () => {
                 {...register("pais", { required: "El país es obligatorio" })}
               >
                 <option value="">Seleccione un país</option>
-                {paises.map((pais) => (
-                  <option key={pais} value={pais}>
-                    {pais}
+                {countries.map((country) => (
+                  <option key={country.name} value={country.iso3}>
+                    {country.name}
                   </option>
                 ))}
               </select>
-              {errors.pais && <ErrorMessage>{errors.pais.message}</ErrorMessage>}
+              {errors.pais && (
+                <ErrorMessage>{errors.pais.message}</ErrorMessage>
+              )}
             </div>
 
             {/* Provincia */}
@@ -173,7 +202,9 @@ const App = () => {
                 id="provincia"
                 disabled={!paisSeleccionado}
                 className="input-form-basic"
-                {...register("provincia", { required: "La provincia es obligatoria" })}
+                {...register("provincia", {
+                  required: "La provincia es obligatoria",
+                })}
               >
                 <option value="">Seleccione una provincia</option>
                 {provinciasList.map((provincia) => (
@@ -182,11 +213,13 @@ const App = () => {
                   </option>
                 ))}
               </select>
-              {errors.provincia && <ErrorMessage>{errors.provincia.message}</ErrorMessage>}
+              {errors.provincia && (
+                <ErrorMessage>{errors.provincia.message}</ErrorMessage>
+              )}
             </div>
           </div>
 
-          <div className="mt-6">
+          <div className="mt-6 flex justify-end">
             <button type="submit" className="button-submit">
               Enviar
             </button>
