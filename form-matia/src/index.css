@@ -1,1 +1,12 @@
 @import "tailwindcss";
+
+.input-form-basic {
+  @apply w-full px-3 py-2 border rounded-lg focus:ring-2  transition duration-300 border-pink-300 focus:ring-pink-500;
+}
+.label-form-basic {
+  @apply block text-gray-700 text-sm font-bold mb-2;
+}
+
+.button-submit {
+  @apply md:w-4/12  bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-3 px-4 rounded-lg focus:ring-2 focus:ring-indigo-500  transform transition duration-300 hover:scale-105;
+}
