@@ -73,7 +73,7 @@ const App = () => {
   return (
     <main className="flex justify-center mt-20 p-10 ">
       <div className="w-full max-w-6xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-        <div className="bg-gradient-to-r from-purple-600 to-indigo-600 px-6 p-4">
+        <div className="bg-gradient-to-r from-pink-900 to-pink-500 px-6 p-4">
           <h2 className="text-2xl font-bold text-white">Añadir Información de Contacto</h2>
         </div>
 
