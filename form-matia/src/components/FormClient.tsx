@@ -63,9 +63,9 @@ function FormClient({ addClient }: Props) {
         const getStatesApi = await getStates(countrySelected);
 
         if (getStatesApi.length > 0) setStates(getStatesApi);
-        else setStates([{ name: "Sin provincias", state_code: "NONE" }]);
+        else setStates([{ name: countrySelected, state_code: "NONE" }]);
       } else {
-        setStates([{ name: "Sin provincias", state_code: "NONE" }]);
+        setStates([{ name: countrySelected, state_code: "NONE" }]);
       }
     };
     fetchStates();
