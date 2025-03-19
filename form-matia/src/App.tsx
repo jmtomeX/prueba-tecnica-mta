@@ -1,7 +1,15 @@
-import ClientTable from "./components/ClientTable";
-import FormClient from "./components/FormClient";
+import { useEffect, useState } from "react";
+import ClientTable from "./components/TableClient";
+import FormClient, { Client } from "./components/FormClient";
 
 const App = () => {
+  const [clients, setClients] = useState<Client[]>([]);
+ 
+  const addClient = (client: any) => {
+    // añadimos el cliente a la lista 
+    setClients((prevClients) => [...prevClients, client]);  
+    //  
+  };
   return (
     <>
       <div className="area">
@@ -20,9 +28,9 @@ const App = () => {
       </div>
 
       <main className="flex justify-center flex-col mt-20 p-10">
-        <FormClient />
+        <FormClient addClient={addClient}/>
         <div className="mt-10">
-          <ClientTable />
+          <ClientTable clients={clients}/>
         </div>
       </main>
     </>

@@ -1,15 +1,13 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import ErrorMessage from "../components/ErrorMessage";
+import ErrorMessage from "./ErrorMessage";
 import {
   getCountries,
   Countries,
   getStates,
   States,
 } from "../apis/countries-api";
-
-// Definición de tipos
-interface FormData {
+export interface Client {
   name: string;
   surname: string;
   telefono?: string;
@@ -17,6 +15,12 @@ interface FormData {
   pais: string;
   provincia: string;
 }
+
+type Props = {
+  addClient: (client: Client) => void;
+};
+
+// Definición de tipos
 const initialValues = {
   name: "",
   surname: "",
@@ -26,13 +30,14 @@ const initialValues = {
   provincia: "",
 };
 
-function FormClient() {
+function FormClient({ addClient }: Props) {
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
-  } = useForm<FormData>({
+  } = useForm<Client>({
     defaultValues: initialValues,
   });
 
@@ -54,18 +59,23 @@ function FormClient() {
   // Actualizamos las provincias cuando cambia el país
   useEffect(() => {
     const fetchStates = async () => {
-      if (countrySelected ) {
+      if (countrySelected) {
         const getStatesApi = await getStates(countrySelected);
 
         if (getStatesApi.length > 0) setStates(getStatesApi);
         else setStates([{ name: "Sin provincias", state_code: "NONE" }]);
-
       } else {
         setStates([{ name: "Sin provincias", state_code: "NONE" }]);
       }
     };
     fetchStates();
   }, [countrySelected]);
+
+  // añadimos el cliente al state
+  const handleAddClient = (client: Client) => {
+    reset(initialValues);
+    addClient(client);
+  };
   return (
     <>
       <div className="w-full max-w-6xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
@@ -77,7 +87,7 @@ function FormClient() {
         <form
           noValidate
           className="p-6"
-          onSubmit={handleSubmit((data) => console.log(data))}
+          onSubmit={handleSubmit(handleAddClient)}
         >
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {/* Nombre */}
