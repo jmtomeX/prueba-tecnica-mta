@@ -71,8 +71,8 @@ nombre-del-repositorio/
 
 En el directorio del proyecto, puedes ejecutar los siguientes comandos:
 
-- `npm start`: Inicia el servidor de desarrollo.
-- `npm build`: Construye la aplicación para producción en la carpeta `build`.
+- `npm run start`: Inicia el servidor de desarrollo.
+- `npm run build`: Construye la aplicación para producción en la carpeta `build`.
 - `npm test`: Ejecuta las pruebas.
 
 
