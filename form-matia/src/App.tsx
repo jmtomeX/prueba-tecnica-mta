@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
+
 import TableClient from "./components/TableClient";
 import FormClient, { Client } from "./components/FormClient";
 import CardClient from "./components/CardClient";
 import { useScreenSize } from "./hooks/useScreenSize";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const App = () => {
   const [clients, setClients] = useState<Client[]>([]);
 
   const screenSize = useScreenSize(); // Obtiene el tamaño de la pantalla
-
 
   //  Recuperar clientes guardados al cargar la app
   useEffect(() => {
@@ -18,7 +21,7 @@ const App = () => {
         const parsedClients = JSON.parse(clientsStorage);
         // asignamos si es un array válido
         if (Array.isArray(parsedClients)) {
-          setClients(parsedClients); 
+          setClients(parsedClients);
         } else {
           console.error(
             "El formato de los datos en localStorage no es válido."
@@ -40,16 +43,18 @@ const App = () => {
   }, [clients]);
 
   const handleDeleteClient = (email: string) => {
-    const updatedClients = clients.filter(client => client.email !== email);
+    const updatedClients = clients.filter((client) => client.email !== email);
     setClients(updatedClients);
     localStorage.setItem("clients", JSON.stringify(updatedClients));
+    toast.error("Cliente eliminado correctamente");
   };
 
   const addClient = (client: any) => {
     // añadimos el cliente a la lista
     setClients((prevClients) => [...prevClients, client]);
-    //
+    toast.success("Cliente añadido correctamente");
   };
+
   return (
     <>
       <div className="area">
@@ -73,19 +78,29 @@ const App = () => {
           {/* Mostramos la tabla de clientes */}
           {clients.length > 0 ? (
             screenSize.isDesktop ? (
-              <TableClient clients={clients} handleDeleteClient={handleDeleteClient} />
+              <TableClient
+                clients={clients}
+                handleDeleteClient={handleDeleteClient}
+              />
             ) : (
-              <CardClient clients={clients} handleDeleteClient={handleDeleteClient}/>
+              <CardClient
+                clients={clients}
+                handleDeleteClient={handleDeleteClient}
+              />
             )
           ) : null}
         </div>
       </main>
+      <ToastContainer
+        position="top-right"
+        pauseOnHover={false}
+        pauseOnFocusLoss={false}
+      />
     </>
   );
 };
-//TODO: 1. Añadir iconos
+
 //TODO: 2. Añadir toast para las confirmaciones
 //TODO: 3. Ordenar lista de clientes por añadidos recientemente
-
 
 export default App;
