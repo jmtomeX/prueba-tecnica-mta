@@ -198,7 +198,7 @@ function FormClient({ addClient }: Props) {
                   required: "La provincia es obligatoria",
                 })}
               >
-                <option value="">Seleccione una provincia</option>
+                <option value="">{!countrySelected ? "Provincia bloqueada" : "Seleccione una provincia"}</option>
                 {states.map((state) => (
                   <option key={state.state_code} value={state.name}>
                     {state.name}
