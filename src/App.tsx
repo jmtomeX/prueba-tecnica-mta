@@ -51,7 +51,7 @@ const App = () => {
 
   const addClient = (client: any) => {
     // añadimos el cliente a la lista
-    setClients((prevClients) => [...prevClients, client]);
+    setClients((prevClients) => [client, ...prevClients]);
     toast.success("Cliente añadido correctamente");
   };
 
@@ -100,6 +100,6 @@ const App = () => {
   );
 };
 
-//TODO: 3. Ordenar lista de clientes por añadidos recientemente
+// https://prueba-tecnica-mta.vercel.app/
 
 export default App;
