@@ -3,7 +3,7 @@ import { Client } from "./FormClient";
 type Props = {
   clients: Client[];
 };
-function ClientTable({ clients }: Props) {
+function TableClient({ clients }: Props) {
   return (
     <div className="w-full max-w-6xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
       <div className="bg-gradient-to-r from-pink-900 to-pink-500 px-6 p-4">
@@ -30,6 +30,9 @@ function ClientTable({ clients }: Props) {
             <th scope="col" className="px-6 py-3">
               Provicia
             </th>
+            <th scope="col" className="px-6 py-3">
+              Acciones
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -49,6 +52,9 @@ function ClientTable({ clients }: Props) {
               <td className="px-6 py-4">{client.email}</td>
               <td className="px-6 py-4">{client.pais}</td>
               <td className="px-6 py-4">{client.provincia}</td>
+              <td className="px-6 py-4">
+                <button className="btn-edit">X</button>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -57,4 +63,4 @@ function ClientTable({ clients }: Props) {
   );
 }
 
-export default ClientTable;
+export default TableClient;
