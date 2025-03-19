@@ -100,7 +100,6 @@ const App = () => {
   );
 };
 
-//TODO: 2. Añadir toast para las confirmaciones
 //TODO: 3. Ordenar lista de clientes por añadidos recientemente
 
 export default App;
