@@ -2,8 +2,9 @@ import { Client } from "./FormClient";
 
 type Props = {
   clients: Client[];
+  handleDeleteClient: (email: string) => void;
 };
-function CardClient({ clients }: Props) {
+function CardClient({ clients, handleDeleteClient }: Props) {
   return (
     <div>
       {clients.map((client, index) => (
@@ -12,9 +13,14 @@ function CardClient({ clients }: Props) {
           className="block max-full p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800
                 dark:border-gray-700 dark:hover:bg-gray-700 mt-2"
         >
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-pink-700">
-            {client.name} {client.surname}
-          </h5>
+          <div className="flex justify-between">
+            <h5 className="mb-2 text-2xl font-bold tracking-tight text-pink-700">
+              {client.name} {client.surname}
+            </h5>
+            <button
+              className="btn-edit"
+              onClick={() => handleDeleteClient(client.email)}>x</button>
+          </div>
           <p className="font-normal text-gray-700 dark:text-gray-400 flex justify-around">
             <span> {client.telefono}</span>
             <span> {client.email}</span>

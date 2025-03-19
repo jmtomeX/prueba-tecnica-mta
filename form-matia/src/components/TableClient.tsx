@@ -2,8 +2,9 @@ import { Client } from "./FormClient";
 
 type Props = {
   clients: Client[];
+  handleDeleteClient: (email: string) => void;
 };
-function TableClient({ clients }: Props) {
+function TableClient({ clients, handleDeleteClient }: Props) {
   return (
     <div className="w-full max-w-6xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
       <div className="bg-gradient-to-r from-pink-900 to-pink-500 px-6 p-4">
@@ -53,7 +54,9 @@ function TableClient({ clients }: Props) {
               <td className="px-6 py-4">{client.pais}</td>
               <td className="px-6 py-4">{client.provincia}</td>
               <td className="px-6 py-4">
-                <button className="btn-edit">X</button>
+                <button className="btn-edit" onClick={handleDeleteClient.bind(null, client.email)}>
+                  X
+                </button>
               </td>
             </tr>
           ))}

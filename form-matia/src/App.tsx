@@ -39,6 +39,12 @@ const App = () => {
     }
   }, [clients]);
 
+  const handleDeleteClient = (email: string) => {
+    const updatedClients = clients.filter(client => client.email !== email);
+    setClients(updatedClients);
+    localStorage.setItem("clients", JSON.stringify(updatedClients));
+  };
+
   const addClient = (client: any) => {
     // añadimos el cliente a la lista
     setClients((prevClients) => [...prevClients, client]);
@@ -67,9 +73,9 @@ const App = () => {
           {/* Mostramos la tabla de clientes */}
           {clients.length > 0 ? (
             screenSize.isDesktop ? (
-              <TableClient clients={clients} />
+              <TableClient clients={clients} handleDeleteClient={handleDeleteClient} />
             ) : (
-              <CardClient clients={clients} />
+              <CardClient clients={clients} handleDeleteClient={handleDeleteClient}/>
             )
           ) : null}
         </div>
@@ -77,5 +83,9 @@ const App = () => {
     </>
   );
 };
+//TODO: 1. Añadir iconos
+//TODO: 2. Añadir toast para las confirmaciones
+//TODO: 3. Ordenar lista de clientes por añadidos recientemente
+
 
 export default App;
