@@ -6,7 +6,7 @@ export interface Countries {
 }
 export interface States {
     name: string;
-    state_code: string;
+    // state_code: string;
 }
 
 
@@ -38,7 +38,8 @@ export const getStates = async (country: string) => {
         // Verificamos si la propiedad 'data' existe en la respuesta
         const data = response.data?.data || [];
 
-        const states = data.states.map(({ name, state_code }: States) => ({ name, state_code }));
+        // const states = data.states.map(({ name, state_code }: States) => ({ name, state_code }));
+        const states = data.states.map(({ name }: States) => ({ name }));
                     
         return states;
     } catch (error) {
