@@ -26,10 +26,10 @@ function TableClient({ clients, handleDeleteClient }: Props) {
               Email
             </th>
             <th scope="col" className="px-6 py-3">
-              Pais
+              País
             </th>
             <th scope="col" className="px-6 py-3">
-              Provicia
+              Provincia
             </th>
             <th scope="col" className="px-6 py-3 justify-center">
               Acciones
