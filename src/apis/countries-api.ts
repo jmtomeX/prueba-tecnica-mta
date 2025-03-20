@@ -3,7 +3,6 @@ import { isAxiosError } from "axios";
 
 export interface Countries {
     name: string;
-    iso3: string;
 }
 export interface States {
     name: string;
@@ -18,7 +17,7 @@ export const getCountries = async () => {
         const response = await api.get(url);
         const { data: { data } } = response;
 
-        const countries = data.map(({ name, iso3 }: Countries) => ({ name, iso3 }));
+        const countries = data.map(({ name }: Countries) => ({ name }));
 
         return countries;
     } catch (error) {
