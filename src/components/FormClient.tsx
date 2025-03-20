@@ -63,9 +63,9 @@ function FormClient({ addClient }: Props) {
         const getStatesApi = await getStates(countrySelected);
 
         if (getStatesApi.length > 0) setStates(getStatesApi);
-        else setStates([{ name: countrySelected, state_code: "NONE" }]);
+        else setStates([{ name: countrySelected }]);
       } else {
-        setStates([{ name: countrySelected, state_code: "NONE" }]);
+        setStates([{ name: countrySelected }]);
       }
     };
     fetchStates();
@@ -200,7 +200,7 @@ function FormClient({ addClient }: Props) {
               >
                 <option value="">{!countrySelected ? "Provincia bloqueada" : "Seleccione una provincia"}</option>
                 {states.map((state) => (
-                  <option key={state.state_code} value={state.name}>
+                  <option key={state.name} value={state.name}>
                     {state.name}
                   </option>
                 ))}
