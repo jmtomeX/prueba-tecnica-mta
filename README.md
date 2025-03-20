@@ -3,7 +3,7 @@
 Este es un proyecto de ejemplo utilizando React, TailwindCSS y Axios. Este proyecto se ha creado por la solicitud de una empresa como una prueba técnica para un proceso de selección.
 Es un formulario que registra clientes y los elimina guardados en el LocalStorage.    
 
-Es responsive y se ajustan los componetes dependiendo de la pantalla, el listado puede estar el tabla si son pantallas medias o grandes y en formato tarjeta si es tamaño movíl.
+Es responsive y se ajustan los componetes dependiendo de la pantalla, el listado puede mostrarse tabla si son pantallas medias o grandes y en formato tarjeta si es tamaño movíl.
 
 ## Tecnologías Utilizadas
 
@@ -54,16 +54,20 @@ nombre-del-repositorio/
 ├── public/
 ├── src/
 │   ├── apis/
-│   ├── assets/
+│   ├── assets/*
 │   ├── components/
-│   ├── helpers/
+│   ├── helpers/*
 │   ├── hooks/
 │   ├── lib/
 │   ├── App.tsx
 │   ├── index.css
+│   ├── main.tsx
 │   ├── index.ts
 ├── .gitignore
+├── eslint.config.js
 ├── package.json
+├── index.html
+├── tsconfig.json
 ├── README.md
 ```
 
@@ -73,7 +77,7 @@ En el directorio del proyecto, puedes ejecutar los siguientes comandos:
 
 - `npm run start`: Inicia el servidor de desarrollo.
 - `npm run build`: Construye la aplicación para producción en la carpeta `build`.
-- `npm test`: Ejecuta las pruebas.
+- `npm run preview`: Ejecuta las pruebas.
 
 
 
