@@ -7,6 +7,7 @@ import { useScreenSize } from "./hooks/useScreenSize";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import BackgroundArea from "./components/BackgroundArea";
 
 const App = () => {
   const [clients, setClients] = useState<Client[]>([]);
@@ -57,20 +58,7 @@ const App = () => {
 
   return (
     <>
-      <div className="area">
-        <ul className="circles">
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-        </ul>
-      </div>
+      <BackgroundArea />
 
       <main className="flex justify-center flex-col mt-20 p-10">
         <FormClient addClient={addClient} />
@@ -100,6 +88,6 @@ const App = () => {
   );
 };
 
-// https://prueba-tecnica-mta.vercel.app/
+
 
 export default App;

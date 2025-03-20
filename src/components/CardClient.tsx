@@ -10,7 +10,7 @@ function CardClient({ clients, handleDeleteClient }: Props) {
       {clients.map((client, index) => (
         <div
           key={index}
-          className="block max-full p-6 bg-white border border-gray-200 rounded-lg shadow-sm  dark:bg-gray-800 mt-2"
+          className="block max-full p-6 bg-white border border-gray-200 rounded-lg shadow-sm mt-2"
         >
           <div className="flex justify-between">
             <h5 className="mb-2 text-2xl font-bold tracking-tight text-pink-700">
@@ -37,20 +37,24 @@ function CardClient({ clients, handleDeleteClient }: Props) {
               </svg>
             </button>
           </div>
-          <p className="font-normal text-gray-700 dark:text-gray-400 flex justify-around">
-            <span> {client.telefono}</span>
-            <span> {client.email}</span>
+          <p className="font-normal text-sm flex justify-between">
+            <span className=" text-pink-700 font-bold">Teléfono</span>{" "}
+            <span className="text-gray-700 text-right">{client.telefono}</span>
+          </p>
+          <p className="font-normal text-sm flex justify-between">
+            <span className=" text-pink-700 font-bold">Email</span>{" "}
+            <span className="text-gray-700">{client.email}</span>
           </p>
 
-          <p className="font-light text-gray-700 dark:text-gray-400 flex justify-around">
-            <span>
-              <span className="text-sm text-pink-700 font-bold">País</span>{" "}
-              {client.pais}
-            </span>
-            <span>
-              <span className="text-sm text-pink-700 font-bold">Provincia</span>{" "}
-              {client.provincia}
-            </span>
+          <p className="font-light text-sm flex justify-between">
+            <span className="text-sm text-pink-700 font-bold ">País</span>{" "}
+            <span className="text-gray-700">{client.pais}</span>
+          </p>
+          <p className="font-light text-sm flex justify-between">
+            <span className="text-sm text-pink-700 font-bold ">
+              Provincia
+            </span>{" "}
+            <span className="text-gray-700">{client.provincia}</span>
           </p>
         </div>
       ))}
