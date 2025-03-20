@@ -60,7 +60,7 @@ const App = () => {
     <>
       <BackgroundArea />
 
-      <main className="flex justify-center flex-col mt-20 p-10">
+      <main className="flex justify-center flex-col p-10 mt-5">
         <FormClient addClient={addClient} />
         <div className="mt-10">
           {/* Mostramos la tabla de clientes */}
